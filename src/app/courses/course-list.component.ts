@@ -8,12 +8,31 @@ import { CourseService } from "./course.service";
 })
 export class CourseListComponent implements OnInit{
 
-    courses: Course[] = [];
+    filteredCourses: Course[] = [];
+
+    _courses: Course[] = [];
+
+    //underline means the variable must be mantained locally only
+    _filterBy!: string;
+    
 
     constructor(private courseService: CourseService) { }
 
     ngOnInit(): void {
-        this.courses = this.courseService.retrieveAll();
+        this._courses = this.courseService.retrieveAll();
+        this.filteredCourses = this._courses;
+    }
+
+    //Define input
+    set filter(value: string) {
+        this._filterBy = value;
+
+        this.filteredCourses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
+    }
+
+    //update input
+    get filter(){
+        return this._filterBy;
     }
 
 }

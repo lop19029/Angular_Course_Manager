@@ -10,11 +10,22 @@ export class CourseService {
         return COURSES;
     }
 
+    retreiveById(id: string | null) : Course {
+        return COURSES.find((courseIterator : Course) => courseIterator.id === id)!
+    }
+
+    save(course: Course) : void {
+        if(course.id) {
+            const index = COURSES.findIndex((courseIterator: Course) => courseIterator.id === course.id);
+            COURSES[index] = course;
+        }
+    }
+
 }
 
 var COURSES: Course[] = [
     {
-        id: 1,
+        id: '1',
         name: 'Angular: CLI',
         releaseDate: 'November 2, 2019',
         description: 'Neste curso, os alunos irão obter um grande conhecimento nos principais recursos do CLI.',
@@ -25,7 +36,7 @@ var COURSES: Course[] = [
         imageUrl: '/assets/images/cli.png',
     },
     {
-        id: 2,
+        id: '2',
         name: 'Angular: Forms',
         releaseDate: 'November 4, 2019',
         description: 'Neste curso, os alunos irão obter um conhecimento aprofundado sobre os recursos disponíveis no módulo de Forms.',
@@ -36,7 +47,7 @@ var COURSES: Course[] = [
         imageUrl: '/assets/images/forms.png',
     },
     {
-        id: 3,
+        id: '3',
         name: 'Angular: HTTP',
         releaseDate: 'November 8, 2019',
         description: 'Neste curso, os alunos irão obter um conhecimento aprofundado sobre os recursos disponíveis no módulo de HTTP.',
@@ -47,7 +58,7 @@ var COURSES: Course[] = [
         imageUrl: '/assets/images/http.png',
     },
     {
-        id: 4,
+        id: '4',
         name: 'Angular: Router',
         releaseDate: 'November 16, 2019',
         description: 'Neste curso, os alunos irão obter um conhecimento aprofundado sobre os recursos disponíveis no módulo de Router.',
@@ -58,7 +69,7 @@ var COURSES: Course[] = [
         imageUrl: '/assets/images/router.png',
     },
     {
-        id: 5,
+        id: '5',
         name: 'Angular: Animations',
         releaseDate: 'November 25, 2019',
         description: 'Neste curso, os alunos irão obter um conhecimento aprofundado sobre os recursos disponíveis sobre Animation.',

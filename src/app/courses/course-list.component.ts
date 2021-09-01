@@ -21,7 +21,7 @@ export class CourseListComponent implements OnInit{
         this.retrieveAll();
     }
 
-
+    
     //the content of the enveloped "Observable" from retrieveAll in 
     //the service is returned in the "next".
     //we suscribe and extract the content and send it to the _courses variable
@@ -39,6 +39,15 @@ export class CourseListComponent implements OnInit{
             error: err => console.log('Error', err)
         })
     }
+    deleteById(courseId:string | null): void {
+        this.courseService.deleteById(courseId).subscribe({
+            next: () => {
+                console.log('Deleted with success');
+                this.retrieveAll();
+            },
+            error: err => console.log('Error', err)
+        })
+    }  
 
     //Define input
     set filter(value: string) {
